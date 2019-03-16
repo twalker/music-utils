@@ -12,13 +12,11 @@ const middleware = [
   routerMiddleware(history) // for dispatching history actions
  ]
 
-
-
 export default function configureStore(initialState={}) {
  return createStore(
    rootReducer(history),
    initialState,
    composeEnhancers(
-   applyMiddleware(...middleware))
- );
+    applyMiddleware(...middleware))
+  );
 }
