@@ -1,47 +1,52 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { connect, Provider } from 'react-redux';
+import { Route, Link } from "react-router-dom";
+import { ConnectedRouter } from 'connected-react-router'
 
+import configureStore, { history } from './store'
 import { simpleAction } from './actions/simpleAction';
 import logo from './logo.svg';
 import './App.css';
 
+const store = configureStore({})
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <Provider store={store}>
+        <ConnectedRouter history={history}> { /* place ConnectedRouter under Provider */ }
 
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-        <Router>
-          <div>
-            <Header />
+          <div className="App">
+            <header className="App-header">
+              <img src={logo} className="App-logo" alt="logo" />
+              <p>
+                Edit <code>src/App.js</code> and save to reload.
+              </p>
+              <a
+                className="App-link"
+                href="https://reactjs.org"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Learn React
+              </a>
+            </header>
+            <div>
+              <Header />
 
-            <Route exact path="/" component={Home} />
-            <Route path="/about" component={About} />
-            <Route path="/topics" component={Topics} />
+              <Route exact path="/" component={Home} />
+              <Route path="/about" component={About} />
+              <Route path="/topics" component={Topics} />
+            </div>
+            <pre>
+            { JSON.stringify(this.props)}
+            </pre>
+            <button onClick={e => {
+              this.props.simpleAction();
+            }
+            }>Test redux action</button>
           </div>
-        </Router>
-        <pre>
-        { JSON.stringify(this.props)}
-        </pre>
-        <button onClick={e => {
-          this.props.simpleAction();
-        }
-        }>Test redux action</button>
-      </div>
+        </ConnectedRouter>
+      </Provider>
     );
   }
 }
