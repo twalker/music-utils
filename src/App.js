@@ -26,7 +26,14 @@ class App extends Component {
             <div>
               <Header />
               <Route exact path="/" component={Home} />
-              <Route path="/about" component={About} />
+              <Route to={{
+                  pathname: "/about",
+                  search: "?sort=name",
+                  hash: "#the-hash",
+                  state: { fromDashboard: true }
+                }}
+                component={About}
+              />
               <Route path="/topics" component={Topics} />
             </div>
             <pre>

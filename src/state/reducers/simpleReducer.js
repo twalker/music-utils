@@ -5,9 +5,6 @@ export default (state = {}, action) => {
      ...state,
      result: action.payload
     }
-   case '@@router/LOCATION_CHANGE':
-    console.log('CHanged', action)
-    return {query: action.payload.search, ...state};
    default:
     return state
   }

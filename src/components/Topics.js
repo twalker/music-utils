@@ -9,10 +9,10 @@ export default ({ match }) => {
 
       <ul>
         <li>
-          <Link to={`${match.url}/components`}>Components</Link>
+          <Link to={`${match.url}/components?foo=bar&baz=qux`}>Components</Link>
         </li>
         <li>
-          <Link to={`${match.url}/props-v-state`}>Props v. State</Link>
+          <Link to={`${match.url}/props-v-state#hello`}>Props v. State</Link>
         </li>
       </ul>
 
