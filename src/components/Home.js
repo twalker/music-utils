@@ -1,2 +1,4 @@
 import React from 'react';
-export default () => <h2>Home</h2>
+export default function Home() {
+  return (<h2>Home</h2>)
+}

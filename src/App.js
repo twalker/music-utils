@@ -5,44 +5,41 @@ import { ConnectedRouter } from 'connected-react-router'
 
 import configureStore, { history } from './state/store'
 import { simpleAction } from './state/actions/simpleAction';
-import logo from './logo.svg';
 import './App.css';
 
 import Header from './components/Header'
 import Home from './components/Home'
 import About from './components/About'
 import Topics from './components/Topics'
+import Metronome from './components/Metronome'
+import Tuner from './components/Tuner'
 
 const store = configureStore({})
+const routes = [
+  {
+    path: '/metronome',
+    component: Metronome
+  },
+  {
+    path: '/tuner',
+    component: Tuner
+  }
+]
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
         <ConnectedRouter history={history}> { /* place ConnectedRouter under Provider */ }
-          <div className="App">
-            <header className="App-header">
-              <img src={logo} className="App-logo" alt="logo" />
-            </header>
-            <div>
-              <Header />
+          <div className="app">
+            <Header />
               <Route exact path="/" component={Home} />
-              <Route to={{
-                  pathname: "/about",
-                  search: "?sort=name",
-                  hash: "#the-hash",
-                  state: { fromDashboard: true }
-                }}
-                component={About}
-              />
+              <Route path="/about" component={About} />
               <Route path="/topics" component={Topics} />
-            </div>
-            <pre>
-            props: { JSON.stringify(this.props)}
-            </pre>
+
+            { routes.map((route, i) => (<Route key={i} {...route} />))}
             <button onClick={e => {
               this.props.simpleAction();
-            }
-            }>Test redux action</button>
+            }}>Test redux action</button>
           </div>
         </ConnectedRouter>
       </Provider>
