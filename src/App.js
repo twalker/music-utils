@@ -13,6 +13,7 @@ import About from './components/About'
 import Topics from './components/Topics'
 import Metronome from './components/Metronome'
 import Tuner from './components/Tuner'
+import Button from '@material-ui/core/Button';
 
 const store = configureStore({})
 const routes = [
@@ -37,9 +38,12 @@ class App extends Component {
               <Route path="/topics" component={Topics} />
 
             { routes.map((route, i) => (<Route key={i} {...route} />))}
-            <button onClick={e => {
-              this.props.simpleAction();
-            }}>Test redux action</button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={e => this.props.simpleAction()}>
+              Test redux action
+            </Button>
           </div>
         </ConnectedRouter>
       </Provider>
